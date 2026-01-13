@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>프리미엄 양주샵</title>
+
+<style>
+body {
+  background:#111;
+  color:#fff;
+  font-family:sans-serif;
+  margin:0;
+  padding:20px;
+}
+
+button {
+  background:gold;
+  border:none;
+  padding:12px 18px;
+  font-size:16px;
+  margin-top:15px;
+}
+
+.modal {
+  position:fixed;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#000;
+}
+
+.modal-content {
+  background:#222;
+  padding:25px;
+  border-radius:10px;
+  text-align:center;
+}
+</style>
+</head>
+
+<body>
+
+<div class="modal" id="age">
+  <div class="modal-content">
+    <h2>🔞 성인 인증</h2>
+    <p>본 사이트는 주류 판매 사이트입니다.</p>
+    <p><strong>매장 방문 수령만 가능합니다.</strong></p>
+    <button onclick="enter()">19세 이상입니다</button>
+  </div>
+</div>
+
+<div id="main" style="display:none">
+  <h1>🥃 프리미엄 양주샵</h1>
+  <p>맥캘란 12년 – 120,000원</p>
+  <button onclick="alert('주문 접수 (시연)')">주문하기</button>
+</div>
+
+<script>
+function enter(){
+  document.getElementById('age').style.display='none';
+  document.getElementById('main').style.display='block';
+}
+</script>
+
+</body>
+</html>
