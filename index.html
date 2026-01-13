@@ -6,63 +6,162 @@
 
 <style>
 body {
-  background:#111;
-  color:#fff;
-  font-family:sans-serif;
   margin:0;
+  background:#0e0e0e;
+  color:#fff;
+  font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+}
+
+header {
+  padding:20px;
+  text-align:center;
+  border-bottom:1px solid #222;
+}
+
+header h1 {
+  margin:0;
+  color:#d4af37;
+}
+
+.container {
   padding:20px;
 }
 
-button {
-  background:gold;
-  border:none;
-  padding:12px 18px;
+.products {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:15px;
+}
+
+.card {
+  background:#161616;
+  border-radius:12px;
+  padding:15px;
+  box-shadow:0 0 20px rgba(0,0,0,.6);
+}
+
+.card h3 {
+  margin:0 0 10px;
   font-size:16px;
-  margin-top:15px;
+}
+
+.price {
+  color:#d4af37;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+button {
+  width:100%;
+  background:linear-gradient(135deg,#d4af37,#b8962e);
+  border:none;
+  border-radius:8px;
+  padding:10px;
+  font-size:15px;
+  cursor:pointer;
 }
 
 .modal {
   position:fixed;
   inset:0;
-  display:flex;
-  justify-content:center;
-  align-items:center;
   background:#000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
 .modal-content {
-  background:#222;
+  background:#1b1b1b;
   padding:25px;
-  border-radius:10px;
+  border-radius:12px;
+  width:90%;
+  max-width:360px;
   text-align:center;
+}
+
+input {
+  width:100%;
+  padding:10px;
+  margin-top:10px;
+  border-radius:6px;
+  border:none;
 }
 </style>
 </head>
 
 <body>
 
+<!-- 성인인증 -->
 <div class="modal" id="age">
   <div class="modal-content">
     <h2>🔞 성인 인증</h2>
-    <p>본 사이트는 주류 판매 사이트입니다.</p>
-    <p><strong>매장 방문 수령만 가능합니다.</strong></p>
-    <button onclick="enter()">19세 이상입니다</button>
+    <p>만 19세 이상만 이용 가능합니다.</p>
+    <button onclick="enter()">동의하고 입장</button>
   </div>
 </div>
 
-<div id="main" style="display:none">
-  <h1>🥃 프리미엄 양주샵</h1>
-  <p>맥캘란 12년 – 120,000원</p>
-  <button onclick="alert('주문 접수 (시연)')">주문하기</button>
+<header>
+  <h1>Premium Liquor Shop</h1>
+  <p>매장 수령 · 계좌이체</p>
+</header>
+
+<div class="container">
+  <div class="products">
+    <div class="card">
+      <h3>맥캘란 12년</h3>
+      <div class="price">120,000원</div>
+      <button onclick="order('맥캘란 12년',120000)">주문하기</button>
+    </div>
+
+    <div class="card">
+      <h3>발렌타인 17년</h3>
+      <div class="price">95,000원</div>
+      <button onclick="order('발렌타인 17년',95000)">주문하기</button>
+    </div>
+
+    <div class="card">
+      <h3>글렌피딕 18년</h3>
+      <div class="price">135,000원</div>
+      <button onclick="order('글렌피딕 18년',135000)">주문하기</button>
+    </div>
+  </div>
+</div>
+
+<!-- 주문 모달 -->
+<div class="modal" id="orderModal" style="display:none">
+  <div class="modal-content">
+    <h3 id="pname"></h3>
+    <p id="pprice"></p>
+    <input id="name" placeholder="이름">
+    <input id="phone" placeholder="연락처">
+    <button onclick="submitOrder()">주문 접수</button>
+  </div>
 </div>
 
 <script>
 function enter(){
   document.getElementById('age').style.display='none';
-  document.getElementById('main').style.display='block';
+}
+
+let product='', price=0;
+
+function order(p,pr){
+  product=p; price=pr;
+  document.getElementById('pname').innerText=p;
+  document.getElementById('pprice').innerText=pr.toLocaleString()+'원';
+  document.getElementById('orderModal').style.display='flex';
+}
+
+function submitOrder(){
+  alert(
+    '주문 접수 완료\n\n' +
+    '상품: '+product+'\n' +
+    '입금계좌: 카카오뱅크 3333285588079 \n' +
+    '매장 수령 시 신분증 지참'
+  );
+  document.getElementById('orderModal').style.display='none';
 }
 </script>
 
 </body>
 </html>
-<!-- deploy -->
